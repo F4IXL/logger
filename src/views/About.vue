@@ -1,6 +1,6 @@
 <template>
   <SettingsPartial>
-    <h1>About</h1>
+    <h1>About (gh)</h1>
     <p>
       F4IXL Logger is an offline web logger. It was mainly inspired by <a
         href="https://n1mmwp.hamdocs.com/"
