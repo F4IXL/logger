@@ -37,7 +37,7 @@
             class="-mb-0"
             :value="log.contest"
             :options="contestOptionsList"
-            @update="updateLogSettings({ contest: $event })"
+            @update="updateLog({ contest: $event })"
           />
         </Tab>
         <Tab title="Contest Definition">
