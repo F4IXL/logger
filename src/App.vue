@@ -5,14 +5,39 @@
   >
     <Header />
     <router-view />
+    <ul
+      v-if="errors.length"
+      class="bg-gray-900"
+    >
+      <li
+        v-for="(error, i) in erros"
+        :key="i"
+      >
+        ({{ error.url }}:{{ error.line }}) {{ error.error }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+
+const errors = []
+
+window.onerror = (error, url, line) => {
+  errors.push({
+    error, url, line
+  })
+}
+
 export default {
   components: {
     Header
+  },
+  data () {
+    return {
+      errors
+    }
   }
 }
 </script>

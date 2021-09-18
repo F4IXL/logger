@@ -143,7 +143,6 @@ export default defineComponent({
       } else if (['SSB', 'CW', 'DIGI', 'AM', 'FM'].includes(call)) {
         emit('modeUpdate')
       } else if (validate()) {
-        console.log('submit')
         emit('submit', $event)
       }
     }
