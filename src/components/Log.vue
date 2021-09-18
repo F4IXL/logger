@@ -30,7 +30,7 @@
             v-for="field in filteredFields"
             :key="field"
           >
-            {{ field }}
+            {{ contest.entry[field].name || field }}
           </th>
         </tr>
       </thead>
@@ -156,7 +156,7 @@ export default defineComponent({
     })
 
     const filteredFields = computed(() => {
-      const exclude = ['call', 'custom']
+      const exclude = ['call']
       return Object.keys(contest.value.entry).filter((key) => {
         return !exclude.includes(key) &&
           !contest.value.entry[key].exclude &&

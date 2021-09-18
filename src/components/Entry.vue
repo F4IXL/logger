@@ -23,46 +23,35 @@
       />
 
       <EntryInput
-        v-if="!contest.entry.sent.hide"
+        v-if="!contest.entry.sentRst.hide"
         label="Snt"
         :size="1"
-        :value="modelValue.sent.value"
+        :value="modelValue.sentRst.value"
         :input-regex="/\d/"
-        @focus="onRstFocus($event, 'sent')"
-        @input="updateModelValue($event.target.value, 'sent')"
+        @focus="onRstFocus($event, 'sentRst')"
+        @input="updateModelValue($event.target.value, 'sentRst')"
       />
 
       <EntryInput
-        v-if="!contest.entry.received.hide"
+        v-if="!contest.entry.rcvdRst.hide"
         label="Rcv"
         :size="1"
         :input-regex="/\d/"
-        :value="modelValue.received.value"
-        @focus="onRstFocus($event, 'received')"
-        @input="updateModelValue($event.target.value, 'received')"
-      />
-
-      <EntryInput
-        v-if="!contest.entry.receivedExchange.hide"
-        :label="contest.entry.receivedExchange.label"
-        :size="contest.entry.receivedExchange.size || 1"
-        :input-regex="contest.entry.receivedExchange.inputRegex"
-        :regex="contest.entry.receivedExchange.regex"
-        :allow-space="contest.entry.receivedExchange.allowSpace"
-        :value="modelValue.receivedExchange.value"
-        @input="updateModelValue($event.target.value, 'receivedExchange')"
+        :value="modelValue.rcvdRst.value"
+        @focus="onRstFocus($event, 'rcvdRst')"
+        @input="updateModelValue($event.target.value, 'rcvdRst')"
       />
 
       <!-- Custom Entries -->
 
       <EntryInput
-        v-for="(input, key) in contest.entry.custom"
+        v-for="(key, index) in filteredFields"
         :key="key"
-        :label="input.label"
-        :input-regex="input.inputRegex"
-        :regex="input.regex"
-        :allow-space="input.allowSpace"
-        :size="input.size"
+        :label="contest.entry[key].name"
+        :key-regex="contest.entry[key].keyRegex"
+        :regex="contest.entry[key].regex"
+        :allow-space="contest.entry[key].allowSpace"
+        :size="contest.entry[key].size || (index === filteredFields.length - 1 && -1)"
         :value="modelValue[key] && modelValue[key].value"
         @input="updateModelValue($event.target.value, key)"
       />
@@ -111,6 +100,15 @@ export default defineComponent({
     const store = useStore()
     const contest = computed(() => store.getters.contest)
     const callElement = ref<typeof EntryInput>(null)
+
+    const filteredFields = computed(() => {
+      const exclude = ['call', 'rcvdRst', 'sentRst']
+      return Object.keys(contest.value.entry).filter((key) => {
+        return !exclude.includes(key) &&
+          !contest.value.entry[key].exclude &&
+          !contest.value.entry[key].hide
+      })
+    })
 
     const reset = () => callElement.value.focus()
     const updateModelValue = (value, key) => {
@@ -164,6 +162,7 @@ export default defineComponent({
     return {
       callElement,
       contest,
+      filteredFields,
       reset,
       updateModelValue,
       wipe,

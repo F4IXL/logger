@@ -63,16 +63,12 @@ export default defineComponent({
         required: true,
         value: ''
       },
-      sent: {
+      sentRst: {
         required: true,
         value: ''
       },
-      received: {
+      rcvdRst: {
         required: true,
-        value: ''
-      },
-      receivedExchange: {
-        required: false,
         value: ''
       }
     })
