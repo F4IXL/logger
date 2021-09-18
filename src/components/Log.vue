@@ -51,14 +51,16 @@
         />
       </tbody>
 
-      <!-- Second table is filtered view of current callsign -->
-      <tbody v-if="filteredQsoList">
+      <!-- Third table is filtered view of current callsign in OTHER LOGS -->
+      <tbody v-if="filteredQsoListOtherLogs">
         <tr
-          v-for="qso in filteredQsoList"
+          v-for="qso in filteredQsoListOtherLogs"
           :key="qso.id"
-          class="bg-green-100"
+          class="bg-red-200"
         >
-          <td>{{ qso.datetime.month }}-{{ qso.datetime.day }} {{ prettyTime(qso.datetime.time) }}</td>
+          <td>
+            {{ qso.datetime.month }}-{{ qso.datetime.day }} {{ prettyTime(qso.datetime.time) }}
+          </td>
           <td v-html="matchCall(qso.call)" />
           <td>{{ qso.vfo.frequency }}</td>
           <td>{{ qso.vfo.mode }}</td>
@@ -71,16 +73,14 @@
         </tr>
       </tbody>
 
-      <!-- Third table is filtered view of current callsign in OTHER LOGS -->
-      <tbody v-if="filteredQsoListOtherLogs">
+      <!-- Second table is filtered view of current callsign -->
+      <tbody v-if="filteredQsoList">
         <tr
-          v-for="qso in filteredQsoListOtherLogs"
+          v-for="qso in filteredQsoList"
           :key="qso.id"
-          class="bg-red-200"
+          class="bg-green-100"
         >
-          <td>
-            {{ qso.datetime.month }}-{{ qso.datetime.day }} {{ prettyTime(qso.datetime.time) }}
-          </td>
+          <td>{{ qso.datetime.month }}-{{ qso.datetime.day }} {{ prettyTime(qso.datetime.time) }}</td>
           <td v-html="matchCall(qso.call)" />
           <td>{{ qso.vfo.frequency }}</td>
           <td>{{ qso.vfo.mode }}</td>
