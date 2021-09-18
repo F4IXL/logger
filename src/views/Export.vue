@@ -116,12 +116,13 @@ export default defineComponent({
           `<mode:${qso.vfo.mode.length}>${qso.vfo.mode}`,
           `<rst_sent:${('' + qso.sent).length}>${qso.sent}`,
           `<rst_rcvd:${('' + qso.received).length}>${qso.received}`,
-          `<operator:${qso.call.length}>${qso.call}`
+          `<operator:${station.value.call.length}>${station.value.call}`
         ]
 
         // Other fields
         if (qso.name) record.push(`<name:${qso.name.length}>${qso.name}`)
         if (qso.comment) record.push(`<comment:${qso.comment.length}>${qso.comment}`)
+        if (station.value.grid && station.value.grid.match(/^[A-Za-z]{2}\d{2}([A-Za-z]{2}(\d{2})?)?$/g)) record.push(`<gridlocator:${station.value.grid}>${station.value.grid}`)
 
         record.push('<eor>')
 

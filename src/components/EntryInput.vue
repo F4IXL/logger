@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/runtime-core'
+import { defineComponent, nextTick, ref, watch } from '@vue/runtime-core'
 
 export default defineComponent({
   props: {
@@ -67,6 +67,15 @@ export default defineComponent({
         event.preventDefault()
       }
     }
+
+    // Setting cursor back to original place
+    watch(() => props.value, () => {
+      const sel = inputElement.value.selectionStart
+      nextTick(() => {
+        inputElement.value.setSelectionRange(sel, sel)
+      })
+    })
+
     const onSpace = (event:KeyboardEvent) => props.allowSpace && event.stopPropagation()
     const select = () => inputElement.value.select()
     const focus = () => inputElement.value.focus()

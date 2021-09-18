@@ -130,6 +130,7 @@ export type Contest = {
 
 export type Contests = {
   DX: Contest,
+  NEAF: Contest,
   WWFF_ACTIVATOR: Contest,
   SOTACHASER: Contest
  }
@@ -180,6 +181,69 @@ export const contests:Contests = {
         name: {
           label: 'Name',
           allowSpace: true,
+          size: 4
+        },
+        comment: {
+          label: 'Comment',
+          allowSpace: true, // Allow use of space in this field
+          size: -1
+          // inputRegex: '',
+          // regex: '',
+        }
+      }
+    },
+    rules: {
+      dupe: true // false, 'band', 'day' // Will forbid dupes
+    }
+  },
+  NEAF: {
+    name: 'NEAF',
+    settings: {
+      timeCategory: {
+        exclude: true
+      },
+      sentExchange: {
+        exclude: false
+      },
+      assistedCategory: {
+        exclude: true
+      },
+      overlay: {
+        exclude: true
+      }
+    },
+    entry: {
+      // Native fields
+      call: {
+        // regex: '^K' // Can be use to restrict to certain callsigns
+      },
+      received: {
+        hide: false,
+        inputRegex: '/d/'
+      },
+      sent: {
+        hide: false,
+        inputRegex: '/d/'
+      },
+      receivedExchange: {
+        exclude: true // exclude from log export
+        // hide: true, // not needed if excluded
+      },
+      sentExchange: {
+        exclude: true
+        // hide: true
+      },
+
+      // Custom fields
+      custom: {
+        rx_power: {
+          label: 'Power',
+          allowSpace: false,
+          size: 4
+        },
+        state_province_country: {
+          label: 'S/P/C',
+          allowSpace: false,
           size: 4
         },
         comment: {

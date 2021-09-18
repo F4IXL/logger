@@ -44,7 +44,7 @@ export default defineComponent({
   setup (props) {
     const { modelValue } = toRefs(props)
     // @todo: use const instead of string
-    const modes = ref<Array<string>>(['USB', 'LSB', 'CW', 'DIGI', 'AM', 'FM'])
+    const modes = ref<Array<string>>(['SSB', 'CW', 'DIGI', 'AM', 'FM'])
 
     const { bandName, frequency } = useFrequencyBand()
 

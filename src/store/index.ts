@@ -1,4 +1,5 @@
 import { CommitOptions, createStore, DispatchOptions, Store as VuexStore } from 'vuex'
+
 // import { contests } from '../api/Contests.js'
 
 import { State, state } from './state'

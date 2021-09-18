@@ -140,9 +140,10 @@ export default defineComponent({
       if (call.match(/^\d+$/)) {
         emit('frequencyUpdate')
         // @todo: Use constants instead of strings
-      } else if (['USB', 'LSB', 'CW', 'DIGI', 'AM', 'FM'].includes(call)) {
+      } else if (['SSB', 'CW', 'DIGI', 'AM', 'FM'].includes(call)) {
         emit('modeUpdate')
       } else if (validate()) {
+        console.log('submit')
         emit('submit', $event)
       }
     }

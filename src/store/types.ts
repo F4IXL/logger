@@ -1,6 +1,6 @@
 import { ContestsKey } from './contests'
 
-export type VfoMode = 'USB' | 'LSB' | 'CW' | 'AM' | 'FM' | 'DIGI'
+export type VfoMode = 'SSB' | 'CW' | 'AM' | 'FM' | 'DIGI'
 
 export interface VfoState {
     frequency: number,
